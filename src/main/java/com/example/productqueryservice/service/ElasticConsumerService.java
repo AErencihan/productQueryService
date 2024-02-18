@@ -3,6 +3,7 @@ package com.example.productqueryservice.service;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
+import com.example.productqueryservice.dto.SearchRequestDto;
 import com.example.productqueryservice.model.Product;
 import com.example.productqueryservice.repository.ProductRepository;
 import com.example.productqueryservice.util.ESUtil;
@@ -17,6 +18,7 @@ import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,10 +47,8 @@ public class ElasticConsumerService {
     }
 
 
-
-
-    public List<Product> getALlProducts(String productName, int size, int page) {
-        Query query = ESUtil.createMatchNameQuery(productName, size, page);
+    public List<Product> searchProduct(String productName, String field, int size, int page) {
+        Query query = ESUtil.createMatchNameQuery(productName, field, size, page);
         log.info("elasticsearch query: {}", query.toString());
         SearchResponse<Product> response = null; // ElasticClient'ın kendi response type'ı.
         try {
@@ -57,9 +57,19 @@ public class ElasticConsumerService {
             throw new RuntimeException(e);
         }
         log.info("Elasticsearch response: {}", response.toString());
-//-------------
+        //-------------
         return extractProductsFromResponse(response);
     }
+
+
+
+
+
+
+
+
+
+
 
     public List<Product> extractProductsFromResponse(SearchResponse<Product> response) {
         return response
