@@ -17,8 +17,8 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfiguration {
 
-    private static final String KAFKA_BROKER = "localhost:9092";
-    private static final String GROUP_ID = "topicProduct";
+    private static final String KAFKA_BROKER = "localhost:29092";
+    private static final String GROUP_ID = "group_Id";
 
 
     @Bean

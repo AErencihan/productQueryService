@@ -1,12 +1,8 @@
 package com.example.productqueryservice.model;
 
 
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -18,6 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 
 
@@ -27,7 +24,6 @@ public class Product {
     @Field(name = "productName")
     private String productName;
 
-    @CreationTimestamp
     @Field(name = "createTime", type = FieldType.Date)
     private LocalDateTime createTime;
 

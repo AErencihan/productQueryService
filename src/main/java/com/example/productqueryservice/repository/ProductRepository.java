@@ -9,4 +9,5 @@ public interface ProductRepository extends ElasticsearchRepository<Product, Long
 
 
 
+
 }
