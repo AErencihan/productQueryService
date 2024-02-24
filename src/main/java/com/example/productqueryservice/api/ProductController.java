@@ -37,6 +37,11 @@ public class ProductController {
                 dto.getSize(), dto.getPage());
     }
 
+    @GetMapping("/boolQuery")
+    public List<Product> boolQuery(@RequestBody SearchRequestDto dto){
+        return elasticsearchService.boolQuery(dto);
+    }
+
 
 
 }

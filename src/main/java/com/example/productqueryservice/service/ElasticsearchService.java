@@ -5,6 +5,7 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
+import com.example.productqueryservice.dto.SearchRequestDto;
 import com.example.productqueryservice.model.Product;
 import com.example.productqueryservice.repository.ProductRepository;
 import com.example.productqueryservice.util.ESUtil;
@@ -45,6 +46,23 @@ public class ElasticsearchService {
     public List<Product> searchProductByNameAndStatusWithQuery(String query, String productName, String status, int size, int page) {
         return productRepository.searchByProductNameAndStatus(query, productName, status, size, page);
     }
+
+
+    public List<Product> boolQuery(SearchRequestDto dto){
+        var query = ESUtil.createBoolQuery(dto);
+        log.info("elasticsearch query: {}", query.toString());
+        SearchResponse<Product> response = null;
+
+        try {
+            response = elasticsearchClient.search(q -> q.index("product").query(query.get()), Product.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        log.info("elasticsearch query: {}", query.toString());
+        return  extractProductsFromResponse(response); //searchResponse'un içerisini parçalayarak istediğimiz şeyin dönmesini sağlayacak
+
+    }
+
 
 
 
