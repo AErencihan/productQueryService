@@ -9,7 +9,6 @@ import com.example.productqueryservice.dto.SearchRequestDto;
 import com.example.productqueryservice.model.Product;
 import com.example.productqueryservice.repository.ProductRepository;
 import com.example.productqueryservice.util.ESUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -48,7 +47,7 @@ public class ElasticsearchService {
     }
 
 
-    public List<Product> boolQuery(SearchRequestDto dto){
+    public List<Product> searchProductNameAndStatusWithBool(SearchRequestDto dto){
         var query = ESUtil.createBoolQuery(dto);
         log.info("elasticsearch query: {}", query.toString());
         SearchResponse<Product> response = null;

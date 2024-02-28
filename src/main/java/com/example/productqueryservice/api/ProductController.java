@@ -2,7 +2,6 @@ package com.example.productqueryservice.api;
 
 import com.example.productqueryservice.dto.SearchRequestDto;
 import com.example.productqueryservice.model.Product;
-import com.example.productqueryservice.service.ElasticConsumerService;
 import com.example.productqueryservice.service.ElasticsearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +37,8 @@ public class ProductController {
     }
 
     @GetMapping("/boolQuery")
-    public List<Product> boolQuery(@RequestBody SearchRequestDto dto){
-        return elasticsearchService.boolQuery(dto);
+    public List<Product> searchProductNameAndStatusWithBool(@RequestBody SearchRequestDto dto){
+        return elasticsearchService.searchProductNameAndStatusWithBool(dto);
     }
 
 
