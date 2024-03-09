@@ -3,6 +3,7 @@ package com.example.productqueryservice.configuration;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -17,7 +18,8 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfiguration {
 
-    private static final String KAFKA_BROKER = "localhost:29092";
+    @Value("${kafka.url}")
+    String KAFKA_BROKER;
     private static final String GROUP_ID = "group_Id";
 
 

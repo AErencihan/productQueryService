@@ -10,13 +10,18 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 @EnableElasticsearchRepositories(basePackages = "com.example.productqueryservice.repository")
 public class ESConfiguration extends ElasticsearchConfiguration {
 
-    @Value("${elasticsearch.url}")
-    private String elasticsearchUrl;
+    @Value("${elasticsearch.host}")
+    private String elasticsearchHost;
+
+    @Value("${elasticsearch.port}")
+    private String elasticsearchPort;
+
+
 
     @Override
     public ClientConfiguration clientConfiguration() {
         return ClientConfiguration.builder()
-                .connectedTo(elasticsearchUrl)
+                .connectedTo(elasticsearchHost + ":" + elasticsearchPort )
                 .build();
     }
 

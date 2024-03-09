@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface ProductRepository extends ElasticsearchRepository<Product, Long> {
 
-
     @Query("{\"bool\": {\"must\": [{\"match\": {\"productName\": \"?0\"}},{\"match\": {\"status\": \"?1\"}}]}}")
     List<Product> searchByProductNameAndStatus(String query, String productName, String status, int size, int page);
 }
