@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/product")
+@RequestMapping("/query/api/v1/product")
 @RequiredArgsConstructor
 @Slf4j
 public class ProductController {
